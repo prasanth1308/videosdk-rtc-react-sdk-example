@@ -1,0 +1,24 @@
+runtime: nodejs20
+service: video-sdk-web
+
+env_variables:
+  REACT_APP_AUTH_URL: 'https://video-sdk-auth-dot-app-launcher-dev-5ef0fa0a.uc.r.appspot.com'
+  PORT: '5005'
+
+default_expiration: "0s"
+
+handlers:
+  - url: /static
+    static_dir: build/static
+    secure: always
+
+  - url: /(.*\.(json|ico))$
+    static_files: build/\1
+    upload: build/.*\.(json|ico)$
+    secure: always
+
+  - url: .*
+    static_files: build/index.html
+    upload: build/index.html
+    expiration: '0s'
+    secure: always
